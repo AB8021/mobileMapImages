@@ -1,0 +1,28 @@
+<div class="upload-container">
+  <div class="upload-progress" *ngIf="authService.user">
+    <input
+      type="file"
+      id="inputFile"
+      capture="user"
+      accept="image/*"
+      #upload
+      (change)="onFileSelected($event)"
+      *ngIf="!uploading"
+    />
+    <mat-progress-bar
+      class="uploadBar"
+      mode="determinate"
+      value="{{ uploadValue }}"
+      *ngIf="uploading"
+    ></mat-progress-bar>
+  </div>
+  <div class="nav-buttons" *ngIf="authService.user">
+    <button (click)="removeUserLocation()">hide me</button>
+    <button (click)="locateUser()">find me</button>
+    <button (click)="logOut()">log out</button>
+  </div>
+  <div class="upload-progress" *ngIf="!authService.user">log in please</div>
+  <div class="nav-buttons" *ngIf="!authService.user">
+    <button (click)="login()">Log in</button>
+  </div>
+</div>
